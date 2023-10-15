@@ -7,8 +7,21 @@ import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import Chip from '@mui/material/Chip';
 
 const Task = (props) => {
+    let chipColor = '';
+  switch (props.priority) {
+    case 'low':
+      chipColor = 'green';
+      break;
+    case 'medium':
+      chipColor = 'yellow';
+      break;
+    case 'high':
+      chipColor = 'red';
+      break;
+  }
     
     return (
         <Grid
@@ -17,10 +30,7 @@ const Task = (props) => {
       xs={12}
       md={4}
   >
-      <Card sx={{
-          backgroundColor: props.done ? 'lightgrey' : 'lightblue',
-          padding: '20px'
-          }}> 
+      <Card sx={{ backgroundColor: props.done ? 'lightgrey' : 'lightblue', padding: '20px' }}> 
           <CardHeader
               title={props.title}
               sx={{
@@ -52,6 +62,7 @@ const Task = (props) => {
               >
                   {props.description}
               </Typography>
+              <Chip label={props.priority} variant="outlined" sx={{ backgroundColor: chipColor }} />
           </CardContent>
           <CardActions sx={{justifyContent: 'space-between', padding: '20px'}}>
               <Button variant="contained" size="small" color="success" onClick={props.markDone}>
@@ -63,9 +74,7 @@ const Task = (props) => {
           </CardActions>
       </Card>
   </Grid>
-
     )
-
 }
 
 export default Task;
